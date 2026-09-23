@@ -18,6 +18,20 @@ for file in Path("knowledge").glob("*.txt"):
     context += "\n\n"
 
 ## Make a call to Qwen with student's question and the context from the knowledge base.
+response = chat(
+    model="qwen2.5:3b",
+    messages=[
+        {
+            "role": "user",
+            "content": (
+                "Answer the student's question using the knowledge base below. "
+                "Give clear troubleshooting steps.\n\n"
+                "Student question:\n" + question +
+                "\nKnowledge base:\n" + context
+            ),
+        }
+    ],
+)
 
 
 
@@ -28,3 +42,4 @@ print(
 )
 
 ## Print the response from Qwen
+print(response.message.content)
